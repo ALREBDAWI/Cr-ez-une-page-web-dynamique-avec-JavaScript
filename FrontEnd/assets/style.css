@@ -34,6 +34,12 @@ body {
 ol, ul {
 	list-style: none;
 }
+a{
+	text-decoration: none;
+}
+a:visited{
+	color: inherit;
+}
 blockquote, q {
 	quotes: none;
 }
@@ -124,6 +130,25 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+#filter-btns{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 2em;
+	gap: 15px;
+}
+#portfolio button{
+	background-color: white;
+	border: solid 1px #1D6154;
+	border-radius: 25px;
+	padding: 2px 10px;
+	font-family: 'Syne';
+	color: #1D6154;
+}
+#portfolio button:hover{
+	background-color: #1D6154;
+	color: white;
 }
 .gallery {
 	width: 100%;
