@@ -1,3 +1,6 @@
+
+//get gallery works using fetch
+
 let data = []; 
 async function getWorks() {
     try {
@@ -9,11 +12,11 @@ async function getWorks() {
     } catch (error) {
         console.error('erreur', error);
         
-    }
-}
-
+    };
+};
 getWorks()
 
+//display gallery works dynamically
 
 async function generateworks(works){
    const gallery = document.querySelector('.gallery');
@@ -32,7 +35,7 @@ async function generateworks(works){
     figcaption.innerText=work.title; 
     
 });
-}
+};
 
 async function getCategory(works){
     try {
@@ -43,10 +46,10 @@ async function getCategory(works){
     } catch (error) {
         console.error('erreur', error);
         
-    }
-}
+    };
+};
     
-
+//addidng gallery works filtering dynamic buttons
 
 function categoryFilter(works,categories){
     const filters = document.getElementById('filter-btns');
@@ -60,16 +63,46 @@ function categoryFilter(works,categories){
     categories.forEach(category =>{
         const btn = document.createElement('button')
         btn.textContent=category.name
-        btn.onclick=() =>{
+        btn.onclick=() => {
              worksFilter(category.name,works)
         }
         filters.appendChild(btn)
     })
-}
+};
 function worksFilter(categoryname,works){
     const filterdWorks = works.filter(work => work.category.name === categoryname)
     generateworks(filterdWorks)
-}
+   
+};
 
 
+// loging 
+    
 
+const btnLoging = document.getElementById('btnLoging');
+btnLoging.addEventListener('click', ()=>{
+    try {
+        const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:5678/api/users/login');
+    xhr.setRequestHeader("Content-Type", "application/json");
+    const data = {
+        email: document.getElementById("email-login").value,
+        password: document.getElementById("pass-login").value,
+    };
+    xhr.send(JSON.stringify(data));
+    xhr.onload = function () {
+        console.log(this.status);
+        if(this.status === 200){
+            window.location.href = './index.html'
+        } else{   //error message when password incorrect
+          document.getElementById('login-error')
+          .innerHTML='<p>Email ou mot de passe incorrect!</p>';
+        }
+    };
+    } catch (error) {
+        console.log('il ya un probleme' , error)
+    };
+});
+
+
+ 

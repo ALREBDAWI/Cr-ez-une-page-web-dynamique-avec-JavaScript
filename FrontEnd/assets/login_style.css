@@ -39,6 +39,11 @@ main{
 .login-box .email{
     margin-bottom: 7px;
 }
+.login-box #login-error{
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+}
 .login-group button{
     border: none;
     border-radius: 60px;

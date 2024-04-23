@@ -10,7 +10,6 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
     <link rel="stylesheet" href="./assets/login_style.css">
-	<script src="./main.js"></script>
 </head>
 <body>
     
@@ -31,11 +30,12 @@
                 <h2 class="login-title">log in</h2>
             <form class="login-box">
                 <label class="email" for="email">E-mail</label>
-                <input type="email">
+                <input id="email-login" type="email">
                 <label class="password" for="password">Mot de passe</label>
-                <input type="password">
+                <input id="pass-login" type="password">
+                <span id="login-error"></span>
             </form>
-                <button class="submit">Se connecter</button>
+                <button id="btnLoging" class="submit">Se connecter</button>
                 <a><p>Mot de passe oublié</p></a>
         </section>
         
@@ -51,5 +51,5 @@
     </footer>
 </body>
 </main>
-
+<script src="./main.js"></script>
 </html>
