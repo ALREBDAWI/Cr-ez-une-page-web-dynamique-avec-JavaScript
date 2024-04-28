@@ -76,33 +76,6 @@ function worksFilter(categoryname,works){
 };
 
 
-// loging 
-    
-
-const btnLoging = document.getElementById('btnLoging');
-btnLoging.addEventListener('click', ()=>{
-    try {
-        const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:5678/api/users/login');
-    xhr.setRequestHeader("Content-Type", "application/json");
-    const data = {
-        email: document.getElementById("email-login").value,
-        password: document.getElementById("pass-login").value,
-    };
-    xhr.send(JSON.stringify(data));
-    xhr.onload = function () {
-        console.log(this.status);
-        if(this.status === 200){
-            window.location.href = './index.html'
-        } else{   //error message when password incorrect
-          document.getElementById('login-error')
-          .innerHTML='<p>Email ou mot de passe incorrect!</p>';
-        }
-    };
-    } catch (error) {
-        console.log('il ya un probleme' , error)
-    };
-});
 
 
  

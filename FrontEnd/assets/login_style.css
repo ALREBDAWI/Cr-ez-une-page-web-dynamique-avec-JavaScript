@@ -10,6 +10,8 @@ header{
     margin: 50px 100px ;
 }
 main{
+    position: relative;
+    margin-bottom: 35px;
 }
 .login-group{
    display: flex;
@@ -63,11 +65,12 @@ a:hover {
 	color: #B1663C;
 }
 footer{
-    height: 60px;
+    height: 2.5rem;
     width: 100%;
     background-color: white;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
+    
 }
 footer ul{
     background-color: white;
