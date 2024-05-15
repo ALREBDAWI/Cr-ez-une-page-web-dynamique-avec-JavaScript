@@ -1,9 +1,4 @@
-    
-
-
-    
-    
-
+// this function updates the site to admin mode
 function isTokenInSessionStorage() {
     const token = sessionStorage.getItem('authToken');
     console.log(token)
@@ -11,15 +6,14 @@ function isTokenInSessionStorage() {
 }
 
 function updateButtonVisibility() {
-    //update index after login variabels
+    //variabels of update index after login 
     const loginBtn = document.getElementById('login-link');
     const filterBtn = document.getElementById('filter-btns');
     const openModal = document.getElementById('openPopupBtn');
     const body = document.querySelector('.body');
     const adminHeader = document.createElement('div');
-    
     adminHeader.id = 'admin-header';
-
+    adminHeader.innerHTML = '  <p><i class="fa-regular fa-pen-to-square id="admin-header-symbol"></i>  Mode édition</p>';
     if (isTokenInSessionStorage()) {
 
         loginBtn.innerHTML = '<li>logout</li>';
@@ -28,7 +22,7 @@ function updateButtonVisibility() {
         openModal.style.display = 'block';
         // admin header
         body.appendChild(adminHeader);
-        adminHeader.style.display= 'block';
+        adminHeader.style.display= 'flex';
         
     } else {
         adminHeader.style.display = 'none';
@@ -45,7 +39,7 @@ window.onload = function(){
 
     const logoutBtn = document.getElementById('logout-link');
 
-    // Event listener for logout button click + Remove token from sessionStorage
+    // Event listener for logout button click  (Remove token from sessionStorage)
         logoutBtn.addEventListener('click', () => {
             sessionStorage.clear();
             window.location.reload();
@@ -57,15 +51,15 @@ window.onload = function(){
      const btn = document.getElementById("openPopupBtn");
  
      const closeModal = document.getElementById("modal-close");
- 
+     
 
     //open the modal on click
     btn.onclick = function() {
-    modal.style.display = "block";
+    modal.style.display = "flex";
     generateworksModal()
     }
 
-    // When the user clicks on  (x), close the modal
+    // When the user clicks on  (x) close the modal
     closeModal.onclick = function() {
     modal.style.display = "none";
     }
@@ -76,10 +70,129 @@ window.onload = function(){
         modal.style.display = "none";
     }
     }
-
     
+    previewImage()
+    postNewWork()
 }
 
+// add work logique
+
+function addWork(){
+    const gallery = document.getElementById("delete-works-modal");
+    const addWorkContent = document.getElementById("addWorkContent");
+    const goBack = document.getElementById("goBack")
+    const openAddWork = document.getElementById("openAddWork")
+
+    openAddWork.style.display = "none";
+
+    gallery.style.display = "none";
+    addWorkContent.style.display = "flex";
+    goBack.style.display = "block";
+    
+    getCatForAdmin()
+
+}
+
+function goBack(){
+    const gallery = document.getElementById("delete-works-modal");
+    const addWorkContent = document.getElementById("addWorkContent");
+    const goBack = document.getElementById("goBack")
+    const openAddWork = document.getElementById("openAddWork")
+
+    openAddWork.style.display = "block";
+    gallery.style.display = "flex";
+    addWorkContent.style.display = "none";
+    goBack.style.display = "none";
+}
+
+function previewImage(){
+    const imgArea = document.querySelector('.img-area');
+    const inputFile = document.querySelector('#image');
+    
+    imgArea.addEventListener('click', function () {
+        inputFile.click();
+    });
+    
+    inputFile.addEventListener('change', function () {
+        const image = this.files[0];
+        if (image.size < 4000000) {
+            const reader = new FileReader();
+            reader.onload = ()=> {
+                const img = document.createElement('img');
+                img.src = reader.result;
+                
+                // Remove existing images
+                imgArea.innerHTML = '';
+                
+                // Append the new image
+                imgArea.appendChild(img);
+                imgArea.classList.add('active');
+                imgArea.dataset.img = image.name;
+            };
+            reader.readAsDataURL(image);
+        } else {
+            alert("Taille de l'image supérieure à 4 Mo");
+        }
+    });
+}
+
+function postNewWork(){
+    document.getElementById('workForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        // Retrieve token from session storage
+        const token = sessionStorage.getItem('authToken');
+    
+        // Collect form data
+        const formData = new FormData(this);
+    
+        // Send form data to backend using fetch
+        fetch('http://localhost:5678/api/works/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+            'Authorization': 'Bearer ' + token // Include token in Authorization header
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Work posted successfully:', data);
+            window.location.reload()
+        })
+        .catch(error => {
+            console.error('Error posting work:', error);
+        });
+        });
+}
+
+
+async function getCatForAdmin(){    //having catigories list for addwork modal dynamically
+
+        try {
+            const responseCategory = await fetch("http://localhost:5678/api/categories")
+                .then(responseCategory => responseCategory.json());
+            
+            // Select the <select> element by its id
+
+            const selectElement = document.getElementById('category');
+
+            // Loop through the categories and create an <option> element for each
+            responseCategory.forEach(category => {
+                const optionElement = document.createElement('option');
+                optionElement.value = category.id; // Set the value attribute
+                optionElement.textContent = category.name; // Set the text content
+                selectElement.appendChild(optionElement); // Append the option to the select element
+            });
+        } catch (error) {
+            console.error('erreur', error);
+        };
+    
+}
 //generate modal works
 function generateworksModal() {
     console.log(data)
@@ -87,24 +200,24 @@ function generateworksModal() {
     gallery.innerHTML=''; 
     data.forEach(work => {
 
-        const portfolio = document.getElementById('modal-content');
+        const portfolio = document.getElementById('delete-works-modal');
         const figure = document.createElement('figure');
         const image = document.createElement('img');
         const figcaption = document.createElement('figcaption');
-        const deleteBtn = document.createElement('button');
+        const deleteBtnContainer = document.createElement('div'); // Changed from button to div
 
         portfolio.appendChild(gallery);
         gallery.appendChild(figure);
+        figure.appendChild(deleteBtnContainer); // Appending delete button container before image
         figure.appendChild(image);
         figure.appendChild(figcaption);
-        figure.appendChild(deleteBtn);
 
-        deleteBtn.innerHTML = 'Delete'; // You can set any text you want for the delete button
+        deleteBtnContainer.innerHTML = '<i class="fas fa-trash-alt"></i>'; // Using Font Awesome trash icon
 
         image.src = work.imageUrl;
 
-        // Add event listener to the delete button
-        deleteBtn.addEventListener('click', function() {
+        // Add event listener to the delete button container
+        deleteBtnContainer.addEventListener('click', function() {
             // Send DELETE request to backend
             fetch(`http://localhost:5678/api/works/${work.id}`, { // Replace '/your-api-endpoint' with your actual endpoint
                 method: 'DELETE',
@@ -129,6 +242,7 @@ function generateworksModal() {
 
     });
 }
+
 
 
 //get gallery works using fetch
@@ -205,4 +319,3 @@ function worksFilter(categoryname,works){
     generateworks(filterdWorks)
    
 };
-
