@@ -57,7 +57,10 @@ window.onload = function(){
     btn.onclick = function() {
     modal.style.display = "flex";
     generateworksModal()
+    
     }
+    
+ 
 
     // When the user clicks on  (x) close the modal
     closeModal.onclick = function() {
@@ -71,6 +74,7 @@ window.onload = function(){
     }
     }
     
+
     previewImage()
     postNewWork()
 }
@@ -82,9 +86,12 @@ function addWork(){
     const addWorkContent = document.getElementById("addWorkContent");
     const goBack = document.getElementById("goBack")
     const openAddWork = document.getElementById("openAddWork")
-
+    const modalTitle = document.getElementById('modal-title');
+    const line = document.getElementById('hr-delete');
+    
+    line.display='none';
+    modalTitle.innerText='Ajout photo';
     openAddWork.style.display = "none";
-
     gallery.style.display = "none";
     addWorkContent.style.display = "flex";
     goBack.style.display = "block";
@@ -94,12 +101,15 @@ function addWork(){
 }
 
 function goBack(){
+
+    const modalTitle = document.getElementById('modal-title');
     const gallery = document.getElementById("delete-works-modal");
     const addWorkContent = document.getElementById("addWorkContent");
     const goBack = document.getElementById("goBack")
     const openAddWork = document.getElementById("openAddWork")
 
-    openAddWork.style.display = "block";
+    modalTitle.innerText = 'Galerie photo';
+    openAddWork.style.display = "flex";
     gallery.style.display = "flex";
     addWorkContent.style.display = "none";
     goBack.style.display = "none";
@@ -180,7 +190,7 @@ async function getCatForAdmin(){    //having catigories list for addwork modal d
             // Select the <select> element by its id
 
             const selectElement = document.getElementById('category');
-
+            selectElement.innerText = ''; //to not repeat categories every time we click
             // Loop through the categories and create an <option> element for each
             responseCategory.forEach(category => {
                 const optionElement = document.createElement('option');
@@ -196,21 +206,42 @@ async function getCatForAdmin(){    //having catigories list for addwork modal d
 //generate modal works
 function generateworksModal() {
     console.log(data)
+    
+    const modalContent = document.getElementById('modal-content');
+    const deleteWorkModalContent = document.getElementById('delete-works-modal');
     const gallery = document.getElementById('modal-gallery');
-    gallery.innerHTML=''; 
+    
+     
+    
+    const btnModal = document.getElementById('openAddWork');
+    
+    btnModal.addEventListener('click', function(){
+        addWork()
+        
+    }) ;
+   
+    
+    // modalContent.innerHTML=' ';
+    gallery.innerHTML=' '; //no repetition on many clicks
+    
     data.forEach(work => {
-
-        const portfolio = document.getElementById('delete-works-modal');
+        
+        
         const figure = document.createElement('figure');
         const image = document.createElement('img');
         const figcaption = document.createElement('figcaption');
         const deleteBtnContainer = document.createElement('div'); // Changed from button to div
+        
 
-        portfolio.appendChild(gallery);
+        deleteWorkModalContent.appendChild(gallery);
         gallery.appendChild(figure);
+        
         figure.appendChild(deleteBtnContainer); // Appending delete button container before image
         figure.appendChild(image);
         figure.appendChild(figcaption);
+        modalContent.append(btnModal);
+        
+        
 
         deleteBtnContainer.innerHTML = '<i class="fas fa-trash-alt"></i>'; // Using Font Awesome trash icon
 
@@ -219,7 +250,7 @@ function generateworksModal() {
         // Add event listener to the delete button container
         deleteBtnContainer.addEventListener('click', function() {
             // Send DELETE request to backend
-            fetch(`http://localhost:5678/api/works/${work.id}`, { // Replace '/your-api-endpoint' with your actual endpoint
+            fetch(`http://localhost:5678/api/works/${work.id}`, { 
                 method: 'DELETE',
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem('authToken') // Include token in Authorization header

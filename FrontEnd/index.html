@@ -52,56 +52,53 @@
 				<span id="modal-close">&times;</span>
 					<!-- Show the photo before uploading it to the server -->
 						<i id="goBack" class="fa-solid fa-arrow-left" onclick="goBack()" ></i>
-					<div id="addWorkContent">
+						<span id="modal-title-container"><p id="modal-title">Galerie photo</p></span>
 					
+						<div id="addWorkContent">
 					
 						
 							<form id="workForm" enctype="multipart/form-data" >
-								<input type="file" id="image" name="image" accept="image/png, image/jpeg" hidden>
+								<input type="file" id="image" name="image" accept="image/png, image/jpeg" hidden required>
 								<div class="img-area" data-img="">
 									<i class='bx bxs-cloud-upload icon'></i>
-									<h3>Upload Image</h3>
+									
 									<i class="fa-regular fa-image fa-7x"></i>
 									<p>jpg, png : 4mo max</p>
 								</div>
 								<div>
-								<label  for="title">Title:</label>
+								<label  for="title">Titre:</label>
 								<input  type="text" id="title" name="title" required>
 								</div>
 								<div>
-								<label for="category">Category:</label>
+								<label for="category">Catégorie:</label>
 								<select id="category" name="category" required>
 									<!-- Populate categories dynamically from backend -->
 								</select>
 								</div>
-								<hr id="hr-add">
-								<button type="submit">Valider</button>
+								
+									<hr id="hr-add">
+									<span id="btn-submit"><button id="btn-post" type="submit">Valider</button></span>
+								
+								
 							</form>
 						
 				</div>
 					
 					<div id="delete-works-modal">
-						
-						
-						<p>Galerie photo</p>
+										
 						
 						<div id="modal-gallery">
 					
 						</div>
+						<hr id="hr-delete">
+						
+							<span id="openAddWork" ><button onclick="addWork()" >Ajouter une photo</button></span>
+							
 							
 						
-						<hr id="hr-delete">	
-						<button id="openAddWork" onclick="addWork()" >Ajouter une photo</button>
-											
-						
-						
-
 					</div>
-
-					
-					
-									
-
+		
+							
 			</div>
 				
 				
