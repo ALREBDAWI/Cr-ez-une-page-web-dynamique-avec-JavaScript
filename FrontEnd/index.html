@@ -12,16 +12,21 @@
 	
 </head>
 <body class="body">
+	
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<a href="./login.html" id="login-link"><li>LogIn</li></a>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+	<div id="admin-bar"></div>
+	<div id="main-header">
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<nav>
+			<ul>
+				<li>projets</li>
+				<li>contact</li>
+				<a href="./login.html" id="login-link"><li>LogIn</li></a>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</div>
+	
 </header>
 <main>
 	<section id="introduction">
@@ -60,9 +65,9 @@
 							<form id="workForm" enctype="multipart/form-data" >
 								<input type="file" id="image" name="image" accept="image/png, image/jpeg" hidden required>
 								<div class="img-area" data-img="">
-									<i class='bx bxs-cloud-upload icon'></i>
 									
-									<i class="fa-regular fa-image fa-7x"></i>
+									<i class="fa-regular fa-image fa-5x"></i>
+									<button>+ Ajouter photo</button>
 									<p>jpg, png : 4mo max</p>
 								</div>
 								<div>
@@ -137,6 +142,6 @@
 </body>
 	<script src="./main.js"></script>
 	<script src="./components/addWork.js"></script>
-	<!--<script src="./modal/modal.js" ></script>-->
+	<script src="./disable_form_button.js"></script>
 	<script src="https://kit.fontawesome.com/5ecaa83591.js" crossorigin="anonymous"></script>
 </html>

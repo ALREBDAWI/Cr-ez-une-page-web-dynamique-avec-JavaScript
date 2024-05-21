@@ -10,7 +10,7 @@ function updateButtonVisibility() {
     const loginBtn = document.getElementById('login-link');
     const filterBtn = document.getElementById('filter-btns');
     const openModal = document.getElementById('openPopupBtn');
-    const body = document.querySelector('.body');
+    const body = document.getElementById('admin-bar');
     const adminHeader = document.createElement('div');
     adminHeader.id = 'admin-header';
     adminHeader.innerHTML = '  <p><i class="fa-regular fa-pen-to-square id="admin-header-symbol"></i>  Mode édition</p>';
@@ -29,7 +29,6 @@ function updateButtonVisibility() {
         openModal.style.display = 'none';
     }
 };
-
 window.onload = function(){
 
 // Call updateButtonVisibility initially to set button visibility
@@ -38,11 +37,12 @@ window.onload = function(){
     let data = []; 
 
     const logoutBtn = document.getElementById('logout-link');
-
+    logoutBtn.href='index.html'; 
     // Event listener for logout button click  (Remove token from sessionStorage)
         logoutBtn.addEventListener('click', () => {
             sessionStorage.clear();
             window.location.reload();
+            
     });
 
      //modal variabels  
@@ -265,6 +265,7 @@ function generateworksModal() {
             .then(data => {
                 console.log('Work deleted successfully:', data);
                 figure.remove();
+                getWorks();
             })
             .catch(error => {
                 console.error('Error deleting work:', error);

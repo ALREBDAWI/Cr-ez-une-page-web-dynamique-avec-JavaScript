@@ -12,16 +12,23 @@
     <link rel="stylesheet" href="./assets/login_style.css">
 </head>
 <body>
-    
+
         <header>
-            <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-            
+            <a href="./index.html"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
+            <nav>
+             <ul>
+				<li>projets</li>
+				<li>contact</li>
+				<a href="./login.html" id="login-link"><li>LogIn</li></a>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>               
+        </nav>
         </header>
 
 	<main>	
         <section class="login-group">
                 <h2 class="login-title">log in</h2>
-            <form class="login-box">
+            <form class="login-box" id="login-box">
                 <label class="email" for="email">E-mail</label>
                 <input id="email-login" type="email">
                 <label class="password" for="password">Mot de passe</label>
