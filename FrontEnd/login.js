@@ -2,7 +2,6 @@
     
 document.addEventListener('DOMContentLoaded',()=>{
     const btnLoging = document.querySelector('form');
-    
     btnLoging.addEventListener('submit', (event)=>{
         event.preventDefault()
         const email = document.getElementById("email-login").value;

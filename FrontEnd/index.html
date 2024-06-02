@@ -48,75 +48,46 @@
 		
 		<div id="filter-btns"></div>
 	</section>		
-		
 			<!-- Modal  -->
 		<div id="myModal" class="modal">   <!--modal transparent surrounding-->
-
 			<!-- Modal content -->
 			<div id="modal-content">
 				<span id="modal-close">&times;</span>
 					<!-- Show the photo before uploading it to the server -->
-						<i id="goBack" class="fa-solid fa-arrow-left" onclick="goBack()" ></i>
+						<i id="goBack" class="fa-solid fa-arrow-left" onclick="goBack()"></i>
 						<span id="modal-title-container"><p id="modal-title">Galerie photo</p></span>
-					
 						<div id="addWorkContent">
-					
-						
 							<form id="workForm" enctype="multipart/form-data" >
 								<input type="file" id="image" name="image" accept="image/png, image/jpeg" hidden required>
 								<div class="img-area" data-img="">
-									
 									<i class="fa-regular fa-image fa-5x"></i>
 									<button>+ Ajouter photo</button>
 									<p>jpg, png : 4mo max</p>
 								</div>
 								<div>
-								<label  for="title">Titre:</label>
-								<input  type="text" id="title" name="title" required>
+									<label  for="title">Titre:</label>
+									<input  type="text" id="title" name="title" required>
 								</div>
 								<div>
-								<label for="category">Catégorie:</label>
-								<select id="category" name="category" required>
-									<!-- Populate categories dynamically from backend -->
-								</select>
+									<label for="category">Catégorie:</label>
+									<select id="category" name="category" required>
+										<!-- Populate categories dynamically from backend -->
+									</select>
 								</div>
-								
-									<hr id="hr-add">
-									<span id="btn-submit"><button id="btn-post" type="submit">Valider</button></span>
-								
-								
+								<hr id="hr-add">
+								<span id="btn-submit"><button id="btn-post" type="submit">Valider</button></span>	
 							</form>
-						
-				</div>
-					
-					<div id="delete-works-modal">
-										
-						
-						<div id="modal-gallery">
-					
 						</div>
+					<div id="delete-works-modal">
+						<div id="modal-gallery"></div>
 						<hr id="hr-delete">
-						
-							<span id="openAddWork" ><button onclick="addWork()" >Ajouter une photo</button></span>
-							
-							
-						
-					</div>
-		
-							
-			</div>
-				
-				
+						<span id="openAddWork" ><button onclick="addWork()" >Ajouter une photo</button></span>
+					</div>		
+			</div>	
 		</div>
 
+		<div class="gallery"></div>
 			
-
-	</div>
-  
-		<div class="gallery">
-			
-		</div>
-	
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
